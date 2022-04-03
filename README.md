@@ -1,24 +1,13 @@
-# sse-demo-vue
+# SSE demo Vue
 
-## Project setup
-```
-npm install
-```
+This is a simple Vue.js project to test the SSE (Server-sent events) connection between the [Node.js server](https://github.com/tienthai0205/SSE-demo-backend) and the Vue.js frontend. 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Development server
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Run `npm run serve` for a dev server. Navigate to `http://localhost:8080/`
 
-### Lints and fixes files
-```
-npm run lint
-```
+*Note: Backend server also need to be running to test the SSE behaviour. Refer to the Node.js repo above to run the server
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The table will automatically update if there are new events got POST to server
+
+Author: Tien Thai
