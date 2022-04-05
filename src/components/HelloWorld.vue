@@ -6,20 +6,20 @@
           <thead>
             <tr>
               <th class="text-left">
-                Info
+                Measurement
               </th>
               <th class="text-left">
-                Source
+                Data
               </th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="item in messages"
-              :key="item.id"
+              v-for="(value, name) in vm.messages"
+              :key="name"
             >
-              <td>{{ item.info }}</td>
-              <td>{{ item.source }}</td>
+              <td>{{ name }}</td>
+              <td>{{ value }}</td>
             </tr>
           </tbody>
         </template>
@@ -28,8 +28,19 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 let sseClient;
 
+var vm = new Vue({
+  data: {
+    messages: {
+        "hum": "",
+        "temp": "",
+        "co": ""
+    }
+  }
+})
 export default {
   name: 'HelloWorld',
   props: {
@@ -37,7 +48,7 @@ export default {
   },
   data() {
     return {
-      messages: []
+      vm
     }
   },
   mounted() {
@@ -57,10 +68,23 @@ export default {
   },
   methods: {
     handleMessage(message) {
-      if(Array.isArray(message)){
-        this.messages = message;
-      } else {
-        this.messages.push(message);
+      console.log("message is ",message);
+      if('hum' in message){
+        console.log("HUM");
+        vm.$set(vm.messages, 'hum', message['hum'])
+        // this.messages['hum'] = message['hum'];
+      }
+      if('temp' in message){
+        console.log("TEMP");
+        vm.$set(vm.messages, 'temp', message['temp'])
+        // this.messages['temp'] = message['temp'];
+        // console.log(this.messages);
+      }
+      if('co' in message){
+        console.log("CO");
+        vm.$set(vm.messages, 'co', message['co'])
+        // this.messages['co'] = message['co'];
+        // console.log(this.messages);
       }
     },
   }
